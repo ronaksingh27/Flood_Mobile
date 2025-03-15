@@ -83,18 +83,33 @@ class _TorrentTileState extends State<TorrentTile> {
               ),
             Expanded(
               child: Slidable(
-                actionPane: SlidableBehindActionPane(),
-                actionExtentRatio: 0.25,
+                key: ValueKey(widget.model.hash),  // Unique key for each item
+                startActionPane: ActionPane(
+                  motion: ScrollMotion(),
+                  children: [
+                    SlidableAction(
+                      onPressed: (context) {
+                        deleteTorrent(
+                          context: context,
+                          indexes: widget.indexes,
+                          torrentModels: [widget.model],
+                          themeIndex: widget.themeIndex,
+                        );
+                      },
+                      backgroundColor: Colors.redAccent,
+                      icon: Icons.delete,
+                      label: context.l10n.button_delete,
+                    ),
+                  ],
+                ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: FocusedMenuHolder(
                     key: Key('Long Press Torrent Tile Menu'),
                     menuBoxDecoration: BoxDecoration(
-                        color: ThemeBloc.theme(widget.themeIndex)
-                            .textTheme
-                            .bodyLarge
-                            ?.color,
-                        borderRadius: BorderRadius.circular(50)),
+                      color: ThemeBloc.theme(widget.themeIndex).textTheme.bodyLarge?.color,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
                     menuWidth: MediaQuery.of(context).size.width * 0.5,
                     menuItemExtent: 60,
                     onPressed: () {},
@@ -108,13 +123,10 @@ class _TorrentTileState extends State<TorrentTile> {
                         });
                       },
                       elevation: 0,
-                      expandedColor:
-                          ThemeBloc.theme(widget.themeIndex).primaryColor,
-                      baseColor:
-                          ThemeBloc.theme(widget.themeIndex).primaryColor,
-                      expandedTextColor: ThemeBloc.theme(widget.themeIndex)
-                          .colorScheme
-                          .secondary,
+                      expandedColor: ThemeBloc.theme(widget.themeIndex).primaryColor,
+                      baseColor: ThemeBloc.theme(widget.themeIndex).primaryColor,
+                      expandedTextColor:
+                          ThemeBloc.theme(widget.themeIndex).colorScheme.secondary,
                       title: ListTile(
                         key: Key(widget.model.hash),
                         contentPadding: EdgeInsets.all(0),
@@ -149,26 +161,20 @@ class _TorrentTileState extends State<TorrentTile> {
                                         percent: widget.model.percentComplete
                                                 .roundToDouble() /
                                             100,
-                                        backgroundColor:
-                                            ThemeBloc.theme(widget.themeIndex)
-                                                .colorScheme
-                                                .secondary
-                                                .withAlpha(80),
-                                        progressColor: (widget
-                                                    .model.percentComplete
-                                                    .toStringAsFixed(1) ==
-                                                '100.0')
-                                            ? ThemeBloc.theme(widget.themeIndex)
-                                                .primaryColorDark
-                                            : Colors.blue,
+                                        backgroundColor: ThemeBloc.theme(widget.themeIndex)
+                                            .colorScheme
+                                            .secondary
+                                            .withAlpha(80),
+                                        progressColor:
+                                            (widget.model.percentComplete.toStringAsFixed(1) ==
+                                                    '100.0')
+                                                ? ThemeBloc.theme(widget.themeIndex)
+                                                    .primaryColorDark
+                                                : Colors.blue,
                                       ),
                                     ),
-                                    SizedBox(
-                                      width: 30,
-                                    ),
-                                    Text(widget.model.percentComplete
-                                            .toStringAsFixed(1) +
-                                        " %"),
+                                    SizedBox(width: 30),
+                                    Text(widget.model.percentComplete.toStringAsFixed(1) + " %"),
                                   ],
                                 ),
                               if (BlocProvider.of<UserInterfaceBloc>(context,
@@ -176,14 +182,11 @@ class _TorrentTileState extends State<TorrentTile> {
                                   .state
                                   .model
                                   .showProgressBar)
-                                SizedBox(
-                                  height: hp * 0.01,
-                                ),
+                                SizedBox(height: hp * 0.01),
                               Row(
                                 children: [
                                   Text(
-                                    (widget.model.status
-                                            .contains('downloading'))
+                                    (widget.model.status.contains('downloading'))
                                         ? '${context.l10n.filter_status_downloading}  '
                                         : '${context.l10n.filter_status_stopped}  ',
                                     key: Key('status widget'),
@@ -200,26 +203,22 @@ class _TorrentTileState extends State<TorrentTile> {
                                           ? ('ETA: ') +
                                               prettyDuration(
                                                   Duration(
-                                                    seconds: widget.model.eta
-                                                        .toInt(),
+                                                    seconds: widget.model.eta.toInt(),
                                                   ),
                                                   abbreviated: true)
                                           : 'ETA : ∞',
                                       overflow: TextOverflow.ellipsis,
                                       key: Key('eta widget'),
                                       style: TextStyle(
-                                          color:
-                                              ThemeBloc.theme(widget.themeIndex)
-                                                  .textTheme
-                                                  .bodyLarge
-                                                  ?.color),
+                                          color: ThemeBloc.theme(widget.themeIndex)
+                                              .textTheme
+                                              .bodyLarge
+                                              ?.color),
                                     ),
                                   ),
                                 ],
                               ),
-                              SizedBox(
-                                height: hp * 0.002,
-                              ),
+                              SizedBox(height: hp * 0.002),
                               Row(
                                 key: Key('download done data widget'),
                                 children: [
@@ -265,8 +264,7 @@ class _TorrentTileState extends State<TorrentTile> {
                                     ),
                                     child: Icon(
                                       Icons.stop,
-                                      color: ThemeBloc.theme(widget.themeIndex)
-                                          .primaryColor,
+                                      color: ThemeBloc.theme(widget.themeIndex).primaryColor,
                                     ),
                                   ),
                                   onTap: () {
@@ -288,8 +286,7 @@ class _TorrentTileState extends State<TorrentTile> {
                                     ),
                                     child: Icon(
                                       Icons.play_arrow,
-                                      color: ThemeBloc.theme(widget.themeIndex)
-                                          .primaryColor,
+                                      color: ThemeBloc.theme(widget.themeIndex).primaryColor,
                                     ),
                                   ),
                                   onTap: () {
@@ -299,12 +296,8 @@ class _TorrentTileState extends State<TorrentTile> {
                                   },
                                 ),
                           (!isExpanded)
-                              ? Icon(
-                                  Icons.keyboard_arrow_down_rounded,
-                                )
-                              : Icon(
-                                  Icons.keyboard_arrow_up_rounded,
-                                ),
+                              ? Icon(Icons.keyboard_arrow_down_rounded)
+                              : Icon(Icons.keyboard_arrow_up_rounded),
                         ],
                       ),
                       children: [
@@ -317,21 +310,6 @@ class _TorrentTileState extends State<TorrentTile> {
                     ),
                   ),
                 ),
-                secondaryActions: <Widget>[
-                  IconSlideAction(
-                    caption: context.l10n.button_delete,
-                    color: Colors.redAccent,
-                    icon: Icons.delete,
-                    onTap: () {
-                      deleteTorrent(
-                        context: context,
-                        indexes: widget.indexes,
-                        torrentModels: [widget.model],
-                        themeIndex: widget.themeIndex,
-                      );
-                    },
-                  ),
-                ],
               ),
             )
           ],

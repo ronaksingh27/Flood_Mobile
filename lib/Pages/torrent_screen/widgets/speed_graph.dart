@@ -59,7 +59,7 @@ class SpeedSpeedGraphState extends State<SpeedGraph> {
         borderWidth: 0,
         borderColor: Colors.transparent,
       ),
-      series: <ChartSeries<GraphModel, int>>[
+      series: <CartesianSeries<GraphModel, int>>[
         SplineAreaSeries(
           dataSource: _speedGraphBloc.state.uploadGraphData,
           xValueMapper: (GraphModel data, index) => data.second,

@@ -2,7 +2,7 @@ import 'package:battery_plus/battery_plus.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wakelock/wakelock.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 part 'power_management_event.dart';
 part 'power_management_state.dart';
@@ -67,7 +67,7 @@ class PowerManagementBloc
     SetKeepCpuAwakeEvent event,
     Emitter<PowerManagementState> emit,
   ) {
-    Wakelock.toggle(enable: event.keepCpuAwake);
+    WakelockPlus.toggle(enable: event.keepCpuAwake);
     emit(state.copyWith(keepCpuAwake: event.keepCpuAwake));
   }
 

@@ -521,35 +521,32 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                 ),
                                                 value: context
                                                     .l10n.feeds_time_minutes,
-                                                icon: Icon(
-                                                  Icons.keyboard_arrow_down,
-                                                  color: ThemeBloc.theme(
-                                                          widget.themeIndex)
-                                                      .textTheme
-                                                      .bodyLarge
-                                                      ?.color,
+                                                iconStyleData: IconStyleData(
+                                                  icon: Icon(
+                                                    Icons.keyboard_arrow_down,
+                                                    color: ThemeBloc.theme(widget.themeIndex)
+                                                        .textTheme
+                                                        .bodyLarge
+                                                        ?.color,
+                                                  ),
                                                 ),
-                                                buttonHeight: 58,
-                                                buttonPadding:
-                                                    const EdgeInsets.only(
-                                                        left: 20, right: 10),
-                                                dropdownDecoration:
-                                                    BoxDecoration(
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.black12
-                                                          .withOpacity(0.5),
-                                                      spreadRadius: 5,
-                                                      blurRadius: 7,
-                                                      offset: Offset(0,
-                                                          3), // changes position of shadow
-                                                    ),
-                                                  ],
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: ThemeBloc.theme(
-                                                          widget.themeIndex)
-                                                      .primaryColorLight,
+                                                buttonStyleData: ButtonStyleData(
+                                                  height: 58,
+                                                  padding: EdgeInsets.only(left: 20, right: 10),
+                                                ),
+                                                dropdownStyleData: DropdownStyleData(
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black12.withOpacity(0.5),
+                                                        spreadRadius: 5,
+                                                        blurRadius: 7,
+                                                        offset: Offset(0, 3), // changes position of shadow
+                                                      ),
+                                                    ],
+                                                    borderRadius: BorderRadius.circular(5),
+                                                    color: ThemeBloc.theme(widget.themeIndex).primaryColorLight,
+                                                  ),
                                                 ),
                                                 items: intervalunits
                                                     .map((item) =>
@@ -860,30 +857,34 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                           .bodyLarge
                                           ?.color),
                                 ),
-                                icon: Icon(
-                                  Icons.keyboard_arrow_down,
-                                  color: ThemeBloc.theme(widget.themeIndex)
-                                      .textTheme
-                                      .bodyLarge
-                                      ?.color,
+                                iconStyleData: IconStyleData(
+                                  icon: Icon(
+                                    Icons.keyboard_arrow_down,
+                                    color: ThemeBloc.theme(widget.themeIndex)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.color,
+                                  ),
                                 ),
-                                buttonHeight: 58,
-                                buttonPadding:
-                                    const EdgeInsets.only(left: 20, right: 10),
-                                dropdownDecoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black12.withOpacity(0.5),
-                                      spreadRadius: 5,
-                                      blurRadius: 7,
-                                      offset: Offset(
-                                          0, 3), // changes position of shadow
-                                    ),
-                                  ],
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: ThemeBloc.theme(widget.themeIndex)
-                                      .primaryColorLight,
+                                buttonStyleData: ButtonStyleData(
+                                  height: 58,
+                                  padding: EdgeInsets.only(left: 20, right: 10),
                                 ),
+                                dropdownStyleData: DropdownStyleData(
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black12.withOpacity(0.5),
+                                        spreadRadius: 5,
+                                        blurRadius: 7,
+                                        offset: Offset(0, 3), // changes position of shadow
+                                      ),
+                                    ],
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: ThemeBloc.theme(widget.themeIndex).primaryColorLight,
+                                  ),
+                                ),
+
                                 items: feedlabelgetter(state.rssFeedsList)
                                     .map((item) => DropdownMenuItem<String>(
                                           value: item,
@@ -1842,33 +1843,32 @@ class _RSSFeedHomePageState extends State<RSSFeedHomePage>
                                                     .bodyLarge
                                                     ?.color),
                                           ),
-                                          icon: Icon(
-                                            Icons.keyboard_arrow_down,
-                                            color: ThemeBloc.theme(
-                                                    widget.themeIndex)
-                                                .textTheme
-                                                .bodyLarge
-                                                ?.color,
+                                          iconStyleData: IconStyleData(
+                                            icon: Icon(
+                                              Icons.keyboard_arrow_down,
+                                              color: ThemeBloc.theme(widget.themeIndex)
+                                                  .textTheme
+                                                  .bodyLarge
+                                                  ?.color,
+                                            ),
                                           ),
-                                          buttonHeight: 58,
-                                          buttonPadding: const EdgeInsets.only(
-                                              left: 20, right: 10),
-                                          dropdownDecoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black12
-                                                    .withOpacity(0.5),
-                                                spreadRadius: 5,
-                                                blurRadius: 7,
-                                                offset: Offset(0,
-                                                    3), // changes position of shadow
-                                              ),
-                                            ],
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                            color: ThemeBloc.theme(
-                                                    widget.themeIndex)
-                                                .primaryColorLight,
+                                          buttonStyleData: ButtonStyleData(
+                                            height: 58,
+                                            padding: EdgeInsets.only(left: 20, right: 10),
+                                          ),
+                                          dropdownStyleData: DropdownStyleData(
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black12.withOpacity(0.5),
+                                                  spreadRadius: 5,
+                                                  blurRadius: 7,
+                                                  offset: Offset(0, 3), // changes position of shadow
+                                                ),
+                                              ],
+                                              borderRadius: BorderRadius.circular(5),
+                                              color: ThemeBloc.theme(widget.themeIndex).primaryColorLight,
+                                            ),
                                           ),
                                           items: feedlabelgetter(
                                                   state.rssFeedsList)
